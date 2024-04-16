@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baasi</title>
+</head>
+<body>
+
+<h1>Send to the base</h1>
+
+<!-- Input field to type -->
+<input type="text" id="nameInput" placeholder="Type your name here">
+<input type="password" id="passInput" placeholder="Type your password here">
+
+<!-- Button to send the name -->
+<button onclick="sendName()">Saada baasi</button>
+
+<script>
+function sendName() {
+  const name = document.getElementById('nameInput').value;
+  const password = document.getElementById('passInput').value;
+  // Here you can send the name to your API endpoint using fetch or any other method
+  // Example using fetch:
+  fetch('http://localhost:3000/insert-name', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: name , password: password})
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('Name and password sent successfully!');
+    } else {
+      alert('Failed to send name!');
+    }
+  })
+  .catch(error => {
+    console.error('Error sending name:', error);
+    alert('Failed to send name!');
+  });
+}
+</script>
+
+</body>
+</html>
